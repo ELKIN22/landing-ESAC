@@ -317,7 +317,67 @@
     }
   });
 
+
+    /**
+   * Clients Slider
+   */
+    new Swiper('.gallery-slider-veterinaria ', {
+      speed: 400,
+      loop: true,
+      centeredSlides: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false
+      },
+      slidesPerView: 'auto',
+      pagination: {
+        el: '.swiper-pagination',
+        type: 'bullets',
+        clickable: true
+      },
+      breakpoints: {
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 20
+        },
+        640: {
+          slidesPerView: 3,
+          spaceBetween: 20
+        },
+        992: {
+          slidesPerView: 4,
+          spaceBetween: 20
+        }
+      }
+    });
+
+    /**
+   * Initiate gallery lightbox 
+   */
+  const galleryLightbox = GLightbox({
+    selector: '.gallery-lightbox'
+  });
+
 })()
+
+document.addEventListener('DOMContentLoaded', (event) => {
+  const hero = document.getElementById('hero');
+  const carousel = document.getElementById('heroCarousel');
+
+  carousel.addEventListener('slide.bs.carousel', function (event) {
+    const nextSlide = event.relatedTarget;
+    const bgImage = nextSlide.getAttribute('data-bg');
+    hero.style.backgroundImage = bgImage;
+  });
+
+  // Set initial background
+  const activeItem = document.querySelector('.carousel-item.active');
+  if (activeItem) {
+    const bgImage = activeItem.getAttribute('data-bg');
+    hero.style.backgroundImage = bgImage;
+  }
+});
+
 
 
 new PureCounter();
